@@ -8,9 +8,10 @@ Stocksunit = Unidades de estoque (a ser adicionada ou removida), Stock storage =
 
 
 */
-
+/*fiz isso e isso */
 int main(){
-
+if printf("hi boss")
+scanf("")
 
 
 
