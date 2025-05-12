@@ -53,7 +53,7 @@ void Menu(){ // Menu de inicialização do programa.
     printf("|-------------------------------------------|\n");
     printf("|     1 - CADASTRAR    |    2 - LISTA       |\n");
     printf("|-------------------------------------------|\n");
-    printf("|     3 - REMOVER      |    4 - AVALIAR     |\n");
+    printf("|     3 - ALTERAR      |    4 - AVALIAR     |\n");
     printf("|-------------------------------------------|\n");
     printf("| Selecione uma opcao ou digite 5 p/ sair.  |\n");
     printf("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+\n");
