@@ -7,7 +7,7 @@ FILE *ListaEstoques;
 
 int opMenu,opLerArquivo; // Operações
 int stockunits, stockstorage; // stockunits = unidade de operações, stockstorage = armazenamento
-char name[24],description[200],buffer[1024];
+char name[24],description[200],expdate[10],buffer[1024];
 // Buffer é uma região de memória. Vai ser usado pra ler todo o arquivo.
 int ArquivoLista();
 void Menu();
@@ -71,6 +71,8 @@ void RegistrarEstoque(){ // Função de registro de estoque
     scanf("%s", &description);
     printf("Qual e o valor do estoque inicial?: \n");
     scanf("%i", &stockstorage);
+    printf("Qual e a data de vencimento? (DD/MM/YYYY): \n");
+    scanf("%i", &expdate);
     GravandoEstoque();
     system("cls");
     Menu();
@@ -79,10 +81,11 @@ void RegistrarEstoque(){ // Função de registro de estoque
 void GravandoEstoque(){
     FILE *ListaEstoques = fopen("ListaEstoques.txt","w+");
 	fprintf(ListaEstoques,"|==================================|\n");
-	fprintf(ListaEstoques,"|Nome:.......%s|\n",name);
+	fprintf(ListaEstoques,"|Nome:.........%s|\n",name);
 	fprintf(ListaEstoques,"|----------------------------------|\n");
-	fprintf(ListaEstoques,"|Quantidade: %i |\n",stockstorage);
-	fprintf(ListaEstoques,"|Descrição:  %s |\n",description);
+	fprintf(ListaEstoques,"|Quantidade:....%i |\n",stockstorage);
+    fprintf(ListaEstoques,"|Data de Venc:..%s |\n",expdate);
+	fprintf(ListaEstoques,"|Descrição:.....%s |\n",description);
 	fprintf(ListaEstoques,"|==================================|\n");
     fprintf(ListaEstoques,"\n");
     fclose(ListaEstoques);
