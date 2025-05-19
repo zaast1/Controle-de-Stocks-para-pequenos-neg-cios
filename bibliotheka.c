@@ -1,22 +1,46 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <string.h>
 
-int opMenu; // Operações
-int stockunits, stockstorage; // Unidades & Valores (em inteiro)
-char name[24],description[200]; // Caracteres.
+FILE *ListaEstoques;
 
-/*
-Stocksunit = Unidades de estoque (a ser adicionada ou removida), Stock storage = Armazenamento de estoque.
-*/
+int opMenu,opLerArquivo; // Operações
+int stockunits, stockstorage; // stockunits = unidade de operações, stockstorage = armazenamento
+char name[24],description[200],expdate[10],buffer[1024];
+// Buffer é uma região de memória. Vai ser usado pra ler todo o arquivo.
+int ArquivoLista();
+void Menu();
+int LerArquivo();
+void RegistrarEstoque();
+void GravandoEstoque();
+// Declarando as funções de antemão para maior performance do código.
+
+int LerArquivo(){
+    ListaEstoques = fopen("ListaEstoques.txt","r");
+	if(ListaEstoques==NULL){
+		printf("Erro ao abrir o Arquivo\n");
+        return 1;
+	}
+        while(fgets(buffer, sizeof(buffer),ListaEstoques) !=NULL){
+        printf("%s", buffer);
+    }
+    fclose(ListaEstoques);
+    do{
+    printf("Digite 5 para retornar ao menu.\n");
+    scanf("%i", &opLerArquivo);
+    }while(opLerArquivo!=5);
+    system("cls");
+    Menu();
+}
 
 void Menu(){ // Menu de inicialização do programa.
     printf("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+\n");
     printf("|           CONTROLE DE ESTOQUES            |\n");
     printf("|-------------------------------------------|\n");
-    printf("|       1 - CADASTRO |      2 - WIP         |\n");
+    printf("|     1 - CADASTRAR    |    2 - LISTA       |\n");
     printf("|-------------------------------------------|\n");
-    printf("|       3 - WIP      |      4 - WIP         |\n");
+    printf("|     3 - ALTERAR      |    4 - AVALIAR     |\n");
     printf("|-------------------------------------------|\n");
     printf("| Selecione uma opcao ou digite 5 p/ sair.  |\n");
     printf("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+\n");
@@ -24,17 +48,35 @@ void Menu(){ // Menu de inicialização do programa.
 
 }
 
-void StockRegister(){ // Função de registro de estoque
+/* Avalia o preço de um único estoque e do estoque ao todo para o usuário
+ver as possibilidades em seu negócio, realizando tipos de avaliações*/
+
+void RegistrarEstoque(){ // Função de registro de estoque
     printf("Qual e o nome do estoque?: \n");
-    scanf("%s", name);
+    scanf("%s", &name);
     printf("Qual é a descricao do estoque?: \n");
-    scanf("%s", description);
+    scanf("%s", &description);
     printf("Qual e o valor do estoque inicial?: \n");
     scanf("%i", &stockstorage);
+    printf("Qual e a data de vencimento? (DD/MM/YYYY): \n");
+    scanf("%s", &expdate);
+    GravandoEstoque();
     system("cls");
     Menu();
 }
 
+void GravandoEstoque(){
+    FILE *ListaEstoques = fopen("ListaEstoques.txt","w+");
+	fprintf(ListaEstoques,"|==================================|\n");
+	fprintf(ListaEstoques,"|Nome:.........%s|\n",name);
+	fprintf(ListaEstoques,"|----------------------------------|\n");
+	fprintf(ListaEstoques,"|Quantidade:....%i |\n",stockstorage);
+    fprintf(ListaEstoques,"|Data de Venc:..%s |\n",expdate);
+	fprintf(ListaEstoques,"|Descrição:.....%s |\n",description);
+	fprintf(ListaEstoques,"|==================================|\n");
+    fprintf(ListaEstoques,"\n");
+    fclose(ListaEstoques);
+}
 
 int main(){
     setlocale(LC_ALL, "Portuguese"); // Coloca o idioma em português.
@@ -44,13 +86,13 @@ int main(){
     {
     case 1:{ // 1 - Cadastro
         system("cls");
-        StockRegister();
+        RegistrarEstoque();
         break;
     }
-        case 2:{ // 2 - WIP
-        printf("Em desenvolvimento.\n");
+        case 2:{ // 2 - Lista dos estoques
         system("cls");
-        Menu();
+        LerArquivo(); // Vai ler os estoques cadastrados no arquivo.
+        break;
         }
         case 3:{ // 3 - WIP
         printf("Em desenvolvimento.\n");
