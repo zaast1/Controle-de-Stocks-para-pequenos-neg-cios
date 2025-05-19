@@ -16,19 +16,6 @@ void RegistrarEstoque();
 void GravandoEstoque();
 // Declarando as funções de antemão para maior performance do código.
 
-
-int ArquivoLista(){
-    FILE *ListaEstoques = fopen("ListaEstoques.txt","w+");
-	if(ListaEstoques==NULL){
-		printf("Erro ao abrir o Arquivo\n");
-        return 1;
-	}
-    else{
-		// Arquivo criado/aberto com sucesso, prosseguir.
-	}
-    fclose(ListaEstoques);
-}
-
 int LerArquivo(){
     ListaEstoques = fopen("ListaEstoques.txt","r");
 	if(ListaEstoques==NULL){
@@ -40,7 +27,7 @@ int LerArquivo(){
     }
     fclose(ListaEstoques);
     do{
-    printf("Digite 5 para retornar ao menu.");
+    printf("Digite 5 para retornar ao menu.\n");
     scanf("%i", &opLerArquivo);
     }while(opLerArquivo!=5);
     system("cls");
@@ -72,7 +59,7 @@ void RegistrarEstoque(){ // Função de registro de estoque
     printf("Qual e o valor do estoque inicial?: \n");
     scanf("%i", &stockstorage);
     printf("Qual e a data de vencimento? (DD/MM/YYYY): \n");
-    scanf("%i", &expdate);
+    scanf("%s", &expdate);
     GravandoEstoque();
     system("cls");
     Menu();
@@ -93,7 +80,6 @@ void GravandoEstoque(){
 
 int main(){
     setlocale(LC_ALL, "Portuguese"); // Coloca o idioma em português.
-    ArquivoLista();
     Menu(); // Inicialização da função "menu".
     do{
     switch(opMenu) // Leitor das opções que pertencem ao menu.
