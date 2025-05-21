@@ -5,6 +5,7 @@
 
 FILE *ListaEstoques;
 
+
 int opMenu,opLerArquivo; // Operações
 int stockunits, stockstorage; // stockunits = unidade de operações, stockstorage = armazenamento
 char name[24],description[200],expdate[10],buffer[1024];
@@ -40,12 +41,13 @@ void Menu(){ // Menu de inicialização do programa.
     printf("|-------------------------------------------|\n");
     printf("|     1 - CADASTRAR    |    2 - LISTA       |\n");
     printf("|-------------------------------------------|\n");
-    printf("|     3 - ALTERAR      |    4 - AVALIAR     |\n");
+    printf("|     3 - SIMULAR      |    4 - EXTRA       |\n");
     printf("|-------------------------------------------|\n");
     printf("| Selecione uma opcao ou digite 5 p/ sair.  |\n");
     printf("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+\n");
     scanf("%i", &opMenu); // Lê a opção inserida, e opera no switch na função main.
 
+    // criar uma função que 
 }
 
 /* Avalia o preço de um único estoque e do estoque ao todo para o usuário
@@ -53,9 +55,9 @@ ver as possibilidades em seu negócio, realizando tipos de avaliações*/
 
 void RegistrarEstoque(){ // Função de registro de estoque
     printf("Qual e o nome do estoque?: \n");
-    scanf("%s", &name);
+    scanf(" %[^\n]", name);
     printf("Qual é a descricao do estoque?: \n");
-    scanf("%s", &description);
+    scanf(" %[^\n]", description);
     printf("Qual e o valor do estoque inicial?: \n");
     scanf("%i", &stockstorage);
     printf("Qual e a data de vencimento? (DD/MM/YYYY): \n");
@@ -66,7 +68,7 @@ void RegistrarEstoque(){ // Função de registro de estoque
 }
 
 void GravandoEstoque(){
-    FILE *ListaEstoques = fopen("ListaEstoques.txt","w+");
+    FILE *ListaEstoques = fopen("ListaEstoques.txt","a+");
 	fprintf(ListaEstoques,"|==================================|\n");
 	fprintf(ListaEstoques,"|Nome:.........%s|\n",name);
 	fprintf(ListaEstoques,"|----------------------------------|\n");
