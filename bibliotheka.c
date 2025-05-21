@@ -7,7 +7,7 @@ FILE *ListaEstoques;
 
 
 int opMenu,opLerArquivo; // Operações
-int stockunits, stockstorage; // stockunits = unidade de operações, stockstorage = armazenamento
+int stockunits, stockstorage, codigo; // stockunits = unidade de operações, stockstorage = armazenamento
 char name[24],description[200],expdate[10],buffer[1024];
 // Buffer é uma região de memória. Vai ser usado pra ler todo o arquivo.
 int ArquivoLista();
@@ -54,15 +54,19 @@ void Menu(){ // Menu de inicialização do programa.
 ver as possibilidades em seu negócio, realizando tipos de avaliações*/
 
 void RegistrarEstoque(){ // Função de registro de estoque
-    printf("Qual e o nome do estoque?: \n");
-    scanf(" %[^\n]", name);
-    printf("Qual é a descricao do estoque?: \n");
-    scanf(" %[^\n]", description);
-    printf("Qual e o valor do estoque inicial?: \n");
-    scanf("%i", &stockstorage);
-    printf("Qual e a data de vencimento? (DD/MM/YYYY): \n");
-    scanf("%s", &expdate);
-    GravandoEstoque();
+    for(codigo = 0; codigo <= 3; codigo++){
+        printf("Qual é o codigo do produto?: \n");
+        scanf("%i", &codigo);
+        printf("Qual e o nome do estoque?: \n");
+        scanf(" %[^\n]", name);
+        printf("Qual é a descricao do estoque?: \n");
+        scanf(" %[^\n]", description);
+        printf("Qual e o valor do estoque inicial?: \n");
+        scanf("%i", &stockstorage);
+        printf("Qual e a data de vencimento? (DD/MM/YYYY): \n");
+        scanf("%s", &expdate);
+        GravandoEstoque();
+    }
     system("cls");
     Menu();
 }
@@ -71,6 +75,7 @@ void GravandoEstoque(){
     FILE *ListaEstoques = fopen("ListaEstoques.txt","a+");
 	fprintf(ListaEstoques,"|==================================|\n");
 	fprintf(ListaEstoques,"|Nome:.........%s|\n",name);
+    fprintf(ListaEstoques,"|Codigo:.........00%i|\n",codigo);
 	fprintf(ListaEstoques,"|----------------------------------|\n");
 	fprintf(ListaEstoques,"|Quantidade:....%i |\n",stockstorage);
     fprintf(ListaEstoques,"|Data de Venc:..%s |\n",expdate);
