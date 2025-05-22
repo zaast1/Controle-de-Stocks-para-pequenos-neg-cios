@@ -6,8 +6,8 @@
 FILE *ListaEstoques;
 
 
-int opMenu,opLerArquivo; // Operações
-int stockunits, stockstorage, codigo; // stockunits = unidade de operações, stockstorage = armazenamento
+int opMenu,opLerArquivo,opSimul; // Operações
+int stockunits, stockstorage, codigo; // stockunits = unidade operativa para alterar o stockstorage, stockstorage = armazenamento
 char name[24],description[200],expdate[10],buffer[1024];
 // Buffer é uma região de memória. Vai ser usado pra ler todo o arquivo.
 int ArquivoLista();
@@ -15,6 +15,9 @@ void Menu();
 int LerArquivo();
 void RegistrarEstoque();
 void GravandoEstoque();
+void Simular();
+void SimulVenda();
+void SimulCompra();
 // Declarando as funções de antemão para maior performance do código.
 
 int LerArquivo(){
@@ -85,6 +88,49 @@ void GravandoEstoque(){
     fclose(ListaEstoques);
 }
 
+void Simular(){
+    do{
+    printf("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+\n");
+    printf("|           SIMULADOR                       |\n");
+    printf("|-------------------------------------------|\n");
+    printf("|     1 - SIMULAR UMA VENDA                 |\n");
+    printf("|-------------------------------------------|\n");
+    printf("|     1 - SIMULAR UMA COMPRA                |\n");
+    printf("|-------------------------------------------|\n");
+    printf("| Selecione uma opcao ou digite 5 p/ voltar |\n");
+    printf("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+\n");
+    scanf("%i", opSimul);
+    switch(opSimul)
+    {
+    case 1:
+        system("cls");
+        SimulVenda();
+        break;
+    case 2:
+        system("cls");
+        SimulCompra();
+    default:
+        break;
+    }
+    }while(opSimul!=5);
+    system("cls");
+    Menu();
+}
+
+void SimulVenda(){
+    printf("Digite o código do produto que deseja vender: ");
+    scanf("%d", &codigo);
+    printf("Digite a quantidade vendida: ");
+    scanf("%d", &stockunits);
+}
+
+void SimulCompra(){
+    printf("Digite o código do produto que deseja comprar: ");
+    scanf("%d", &codigo);
+    printf("Digite a quantidade que vai ser comprada: ");
+    scanf("%d", &stockunits);
+}
+
 int main(){
     setlocale(LC_ALL, "Portuguese"); // Coloca o idioma em português.
     Menu(); // Inicialização da função "menu".
@@ -101,9 +147,10 @@ int main(){
         LerArquivo(); // Vai ler os estoques cadastrados no arquivo.
         break;
         }
-        case 3:{ // 3 - WIP
-        printf("Em desenvolvimento.\n");
+        case 3:{ // 3 - Simulação
         system("cls");
+        Simular();
+        break;
         }
         case 4:{ // 4 - WIP
         printf("Em desenvolvimento.\n");
