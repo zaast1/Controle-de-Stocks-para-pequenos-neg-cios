@@ -39,15 +39,15 @@ int LerArquivo(){
 }
 
 void Menu(){ // Menu de inicialização do programa.
-    printf("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+\n");
-    printf("|           CONTROLE DE ESTOQUES            |\n");
-    printf("|-------------------------------------------|\n");
-    printf("|     1 - CADASTRAR    |    2 - LISTA       |\n");
-    printf("|-------------------------------------------|\n");
-    printf("|     3 - SIMULAR      |    4 - EXTRA       |\n");
-    printf("|-------------------------------------------|\n");
-    printf("| Selecione uma opcao ou digite 5 p/ sair.  |\n");
-    printf("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+\n");
+    printf("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+\n");
+    printf("|           CONTROLE DE ESTOQUES                 |\n");
+    printf("|------------------------------------------------|\n");
+    printf("|     1 - CADASTRAR    |    2 - LISTA            |\n");
+    printf("|------------------------------------------------|\n");
+    printf("|     3 - SIM COMP      |    4 - SIM VENDA       |\n");
+    printf("|------------------------------------------------|\n");
+    printf("| Selecione uma opcao ou digite 5 p/ sair.       |\n");
+    printf("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+\n");
     scanf("%i", &opMenu); // Lê a opção inserida, e opera no switch na função main.
 
     // criar uma função que 
@@ -73,7 +73,7 @@ void RegistrarEstoque(){ // Função de registro de estoque
     system("cls");
     Menu();
 }
-
+//alterar quantidade aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 void GravandoEstoque(){
     FILE *ListaEstoques = fopen("ListaEstoques.txt","a+");
 	fprintf(ListaEstoques,"|==================================|\n");
@@ -86,35 +86,6 @@ void GravandoEstoque(){
 	fprintf(ListaEstoques,"|==================================|\n");
     fprintf(ListaEstoques,"\n");
     fclose(ListaEstoques);
-}
-
-void Simular(){
-    do{
-    printf("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+\n");
-    printf("|           SIMULADOR                       |\n");
-    printf("|-------------------------------------------|\n");
-    printf("|     1 - SIMULAR UMA VENDA                 |\n");
-    printf("|-------------------------------------------|\n");
-    printf("|     1 - SIMULAR UMA COMPRA                |\n");
-    printf("|-------------------------------------------|\n");
-    printf("| Selecione uma opcao ou digite 5 p/ voltar |\n");
-    printf("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+\n");
-    scanf("%i", opSimul);
-    switch(opSimul)
-    {
-    case 1:
-        system("cls");
-        SimulVenda();
-        break;
-    case 2:
-        system("cls");
-        SimulCompra();
-    default:
-        break;
-    }
-    }while(opSimul!=5);
-    system("cls");
-    Menu();
 }
 
 void SimulVenda(){
@@ -147,14 +118,14 @@ int main(){
         LerArquivo(); // Vai ler os estoques cadastrados no arquivo.
         break;
         }
-        case 3:{ // 3 - Simulação
+        case 3:{ // 3 - Simulação de compra
         system("cls");
-        Simular();
+        SimulCompra();
         break;
         }
-        case 4:{ // 4 - WIP
-        printf("Em desenvolvimento.\n");
+        case 4:{ // 4 - Simulação de Venda
         system("cls");
+        SimulVenda();
         }
     default:
         break;
